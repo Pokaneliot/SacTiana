@@ -9,6 +9,9 @@ import { Layout } from '../components/Layout';
 import { ProductsPage } from '../features/products/ProductsPage';
 import { CreateProductPage } from '../features/products/CreateProductPage';
 import { EditProductPage } from '../features/products/EditProductPage';
+import { CategoriesPage } from '../features/categories/CategoriesPage';
+import { CreateCategoryPage } from '../features/categories/CreateCategoryPage';
+import { EditCategoryPage } from '../features/categories/EditCategoryPage';
 
 // Protected Route Component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -85,6 +88,32 @@ export function AppRouter() {
         element={
           <ProtectedRoute>
             <EditProductPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Category Routes */}
+      <Route
+        path="/categories"
+        element={
+          <ProtectedRoute>
+            <CategoriesPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/categories/create"
+        element={
+          <ProtectedRoute>
+            <CreateCategoryPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/categories/:id/edit"
+        element={
+          <ProtectedRoute>
+            <EditCategoryPage />
           </ProtectedRoute>
         }
       />

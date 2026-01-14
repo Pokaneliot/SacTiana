@@ -72,6 +72,14 @@ export function Layout({ children }: LayoutProps) {
           >
             📦 Products
           </NavLink>
+
+          <NavLink
+            to="/categories"
+            className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+            onClick={closeSidebar}
+          >
+            🏷️ Categories
+          </NavLink>
         </nav>
 
         <div className="sidebar-footer">

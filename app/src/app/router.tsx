@@ -3,7 +3,12 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from '../features/auth/hooks';
 import { LoginPage } from '../features/auth/LoginPage';
+import { DashboardPage } from '../features/dashboard/DashboardPage';
 import { Loader } from '../components/Loader';
+import { Layout } from '../components/Layout';
+import { ProductsPage } from '../features/products/ProductsPage';
+import { CreateProductPage } from '../features/products/CreateProductPage';
+import { EditProductPage } from '../features/products/EditProductPage';
 
 // Protected Route Component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -17,7 +22,7 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
     return <Navigate to="/login" replace />;
   }
 
-  return <>{children}</>;
+  return <Layout>{children}</Layout>;
 }
 
 // Public Route Component (redirect to dashboard if already authenticated)
@@ -33,20 +38,6 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
   }
 
   return <>{children}</>;
-}
-
-// Temporary Dashboard Component
-function DashboardPage() {
-  const { user, logout } = useAuth();
-
-  return (
-    <div style={{ padding: '40px' }}>
-      <h1>Dashboard</h1>
-      <p>Welcome, {user?.name}!</p>
-      <p>Role: {user?.role}</p>
-      <button onClick={logout}>Logout</button>
-    </div>
-  );
 }
 
 export function AppRouter() {
@@ -68,6 +59,32 @@ export function AppRouter() {
         element={
           <ProtectedRoute>
             <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Product Routes */}
+      <Route
+        path="/products"
+        element={
+          <ProtectedRoute>
+            <ProductsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/products/new"
+        element={
+          <ProtectedRoute>
+            <CreateProductPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/products/:id/edit"
+        element={
+          <ProtectedRoute>
+            <EditProductPage />
           </ProtectedRoute>
         }
       />
